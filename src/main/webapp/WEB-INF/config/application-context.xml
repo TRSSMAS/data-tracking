@@ -78,11 +78,11 @@
 		<property name="shards">
 			<list>
 				<bean class="com.trs.smas.tracking.model.search.impl.TRSShardImpl">
-					<property name="host" value="192.168.50.99" />
-					<property name="port" value="8888" />
+					<property name="host" value="122.112.34.19" />
+					<property name="port" value="8885" />
 					<property name="userName" value="system" />
 					<property name="password" value="manager" />
-					<property name="database" value="trssmas" />
+					<property name="database" value="trssmas_base_small" />
 				</bean>
 			</list>
 		</property>
@@ -93,9 +93,9 @@
 	<bean name="issueAdminService" class="com.trs.smas.tracking.model.issue.impl.IssueAdminServiceImpl">
 		<property name="documentSearchService" ref="documentSearchService" />
 		<property name="jiraSoapServiceFactory" ref="jiraSoapServiceFactory" />
-		<property name="jiraProject" value="PRJ" />
-		<property name="jiraUserName" value="jiraUser" />
-		<property name="jiraPassword" value="jiraPwd" />
+		<property name="jiraProject" value="DCINFORADAR" />
+		<property name="jiraUserName" value="jirauser" />
+		<property name="jiraPassword" value="jirapwd" />
 	</bean>
 	
 <!-- Imports -->

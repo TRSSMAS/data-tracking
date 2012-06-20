@@ -27,7 +27,8 @@ public class IssueAdminServiceImpl implements IIssueAdminService {
 
 	private JiraSoapServiceService jiraSoapServiceFactory;
 
-	private static final String JIRA_ISSUE_TYPE = "BUG";
+	private static final String JIRA_ISSUE_TYPE_BUG = "1";
+	
 	private String jiraProject;
 
 	private String jiraUserName;
@@ -59,11 +60,14 @@ public class IssueAdminServiceImpl implements IIssueAdminService {
 	public String createIssue(String documentId)
 			throws SMASDataTrackingException {
 		String trsl = Const.DOCUMENT_FIELD_SID + "='" + documentId + "'";
-		Document document;
+		Document document = null;
 		try {
 			document = documentSearchService.findFirst(trsl);
 		} catch (TRSException e) {
 			LOG.error("fail to get document by sid:[" + documentId + "]", e);
+		}
+		
+		if(document == null){
 			document = new Document();
 			document.setSId(documentId);
 		}
@@ -80,16 +84,23 @@ public class IssueAdminServiceImpl implements IIssueAdminService {
 	protected RemoteIssue buildIssue(Document document) {
 		RemoteIssue issue = new RemoteIssue();
 		issue.setProject(this.jiraProject);
-		issue.setType(JIRA_ISSUE_TYPE);
+		issue.setType(JIRA_ISSUE_TYPE_BUG);
 		issue.setSummary(StringHelper.isEmpty(document.getTitle()) ? document
 				.getSId() : document.getTitle());
-		issue.setDescription(Const.DOCUMENT_FIELD_SID + " : "
-				+ document.getSId() + "\n\r" + Const.DOCUMENT_FIELD_URL + " : "
-				+ StringHelper.avoidNull(document.getURL()) + "\n\r"
-				+ Const.DOCUMENT_FIELD_GROUPNAME + " : "
-				+ StringHelper.avoidNull(document.getGroupName()) + "\n\r"
-				+ Const.DOCUMENT_FIELD_SITENAME + " : "
-				+ StringHelper.avoidNull(document.getSiteName()));
+		
+		StringBuilder descBuilder = new StringBuilder();
+		descBuilder.append(Const.DOCUMENT_FIELD_SID).append(": ").append(StringHelper.avoidNull(document.getSId())).append("\n\r");
+		descBuilder.append(Const.DOCUMENT_FIELD_GROUPNAME).append(": ").append(StringHelper.avoidNull(document.getGroupName())).append("\n\r");
+		descBuilder.append(Const.DOCUMENT_FIELD_SITENAME).append(": ").append(StringHelper.avoidNull(document.getSiteName())).append("\n\r");
+		descBuilder.append(Const.DOCUMENT_FIELD_TITLE).append(": ").append(StringHelper.avoidNull(document.getTitle())).append("\n\r");
+		descBuilder.append(Const.DOCUMENT_FIELD_URL).append(": ");
+		String url = StringHelper.avoidNull(document.getURL());
+		if((false == StringHelper.isEmpty(url)) && false == url.startsWith("http")){
+			descBuilder.append("http://");
+		}
+		descBuilder.append(url);
+		issue.setDescription(descBuilder.toString());
+		
 		return issue;
 	}
 
