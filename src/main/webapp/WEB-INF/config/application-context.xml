@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+			
+<!-- 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" >
+			<array>
+				<value>WEB-INF/config/hibernate.properties </value>
+			</array>
+		</property>
+	</bean>
+	
+	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${hibernate.connection.driver_class}"/>
+    	<property name="jdbcUrl" value="${hibernate.connection.url}"/>
+    	<property name="user" value="${hibernate.connection.username}"/>
+    	<property name="password" value="${hibernate.connection.password}"/>
+    	<property name="initialPoolSize" value="${hibernate.c3p0.initial_pool_size}"/>
+    	<property name="minPoolSize" value="${hibernate.c3p0.min_pool_size}" />
+		<property name="maxPoolSize" value="${hibernate.c3p0.max_pool_size}" />
+        <property name="acquireIncrement" value="${hibernate.c3p0.acquire_increment}" />
+        <property name="maxStatements" value="${hibernate.c3p0.max_statements}" />
+        <property name="idleConnectionTestPeriod" value="${hibernate.c3p0.idle_connection_test_period}" />
+	</bean>				
+	<bean name="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan">
+			<list>
+				<value>com.trs.smas.tracking.bo</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
+				<prop key="cache.provider_class">${hibernate.cache.provider_class}</prop>
+				<prop key="show_sql">${hibernate.show_sql}</prop>
+			</props>
+		</property>
+	</bean>
+ -->
+	
+	<!-- Feedback -->
+<!-- 	<bean name="feedbackAdminService" class="com.trs.smas.tracking.model.feedback.impl.FeedbackAdminServiceImpl">
+		<property name="feedbackManager">
+			<bean name="feedbackManager" class="com.trs.smas.tracking.model.feedback.impl.FeedbackManager">
+				<property name="accessor">
+					<bean class="com.trs.dev4.jdk16.dao.hb3.GenericBaseDAO">
+						<constructor-arg value="com.trs.smas.tracking.bo.Feedback" />
+						<property name="sessionFactory" ref="sessionFactory" />
+					</bean>
+				</property>
+			</bean>			
+		</property>
+	</bean>
+ -->	
+	
+	<!-- Comment -->
+<!-- 	<bean name="commentAdminService" class="com.trs.smas.tracking.model.comment.impl.CommentAdminServiceImpl">
+		<property name="commentManager">
+			<bean name="commentManager" class="com.trs.smas.tracking.model.comment.impl.CommentManager">
+				<property name="accessor">
+					<bean class="com.trs.dev4.jdk16.dao.hb3.GenericBaseDAO">
+						<constructor-arg value="com.trs.smas.tracking.bo.Comment" />
+						<property name="sessionFactory" ref="sessionFactory" />
+					</bean>
+				</property>
+			</bean>			
+		</property>
+	</bean>
+ -->	
+	
+	<bean name="documentSearchService" class="com.trs.smas.tracking.model.search.impl.DocumentSearchServiceImpl">
+		<property name="shards">
+			<list>
+				<bean class="com.trs.smas.tracking.model.search.impl.TRSShardImpl">
+					<property name="host" value="192.168.50.99" />
+					<property name="port" value="8888" />
+					<property name="userName" value="system" />
+					<property name="password" value="manager" />
+					<property name="database" value="trssmas" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean name="jiraSoapServiceFactory" class="cn.net.trs.dev4.rpc.soap.jirasoapservice_v2.JiraSoapServiceServiceLocator" />
+	
+	<bean name="issueAdminService" class="com.trs.smas.tracking.model.issue.impl.IssueAdminServiceImpl">
+		<property name="documentSearchService" ref="documentSearchService" />
+		<property name="jiraSoapServiceFactory" ref="jiraSoapServiceFactory" />
+		<property name="jiraProject" value="IPHONEOM" />
+		<property name="jiraUserName" value="huangshengbo" />
+		<property name="jiraPassword" value="huang*(0" />
+	</bean>
+	
+<!-- Imports -->
+	<!-- <import resource="./security.xml"/> -->
+</beans>			

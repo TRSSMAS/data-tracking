@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN"
+        "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">
+
+<urlrewrite default-match-type="wildcard">
+
+	<rule match-type="regex">
+		<from>^([^\.]+)$</from>
+		<to>/app/$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/app/**</from>
+		<to>/$1</to>
+	</outbound-rule>
+</urlrewrite>
+
