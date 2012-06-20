@@ -3,4 +3,4 @@
 .settings
 target
 src/main/webapp/WEB-INF/config/hibernate.properties
-src/gen/java
+src/gen/java/**/*
