@@ -93,9 +93,9 @@
 	<bean name="issueAdminService" class="com.trs.smas.tracking.model.issue.impl.IssueAdminServiceImpl">
 		<property name="documentSearchService" ref="documentSearchService" />
 		<property name="jiraSoapServiceFactory" ref="jiraSoapServiceFactory" />
-		<property name="jiraProject" value="IPHONEOM" />
-		<property name="jiraUserName" value="huangshengbo" />
-		<property name="jiraPassword" value="huang*(0" />
+		<property name="jiraProject" value="PRJ" />
+		<property name="jiraUserName" value="jiraUser" />
+		<property name="jiraPassword" value="jiraPwd" />
 	</bean>
 	
 <!-- Imports -->
