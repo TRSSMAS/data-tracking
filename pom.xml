@@ -86,7 +86,7 @@
         </dependency>
        <dependency>
         	<groupId>com.trs.dev4</groupId>
-        	<artifactId>infra-jdk16</artifactId>
+        	<artifactId>trsdev4-infra-jdk16</artifactId>
         	<version>1.0</version>
         	<type>jar</type>
         	<scope>compile</scope>
@@ -94,7 +94,7 @@
         <dependency>
         	<groupId>com.trs</groupId>
         	<artifactId>trsbean</artifactId>
-        	<version>1.0</version>
+        	<version>61B3320</version>
         	<type>jar</type>
         	<scope>compile</scope>
         </dependency>
