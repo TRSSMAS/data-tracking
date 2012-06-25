@@ -4,6 +4,10 @@ public class Document {
 
 	private String sId;
 	
+	private String startId;
+	
+	private String HKey;
+	
 	private String URL;
 	
 	private String title;
@@ -17,6 +21,18 @@ public class Document {
 	}
 	public void setSId(String sId) {
 		this.sId = sId;
+	}
+	public String getStartId() {
+		return startId;
+	}
+	public void setStartId(String startId) {
+		this.startId = startId;
+	}
+	public String getHKey() {
+		return HKey;
+	}
+	public void setHKey(String hKey) {
+		HKey = hKey;
 	}
 	public String getURL() {
 		return URL;

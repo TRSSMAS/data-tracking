@@ -19,6 +19,8 @@ public class DocumentSearchServiceImpl implements IDocumentSearchService {
 		public Document build(TRSResultSet current) throws TRSException {
 			Document document = new Document();
 			document.setSId(current.getString(Const.DOCUMENT_FIELD_SID));
+			document.setStartId(current.getString(Const.DOCUMENT_FIELD_STARTID));
+			document.setHKey(current.getString(Const.DOCUMENT_FIELD_HKEY));
 			document.setTitle(current.getString(Const.DOCUMENT_FIELD_TITLE));
 			document.setURL(current.getString(Const.DOCUMENT_FIELD_URL));
 			document.setGroupName(current.getString(Const.DOCUMENT_FIELD_GROUPNAME));

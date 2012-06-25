@@ -68,6 +68,7 @@ public class IssueAdminServiceImpl implements IIssueAdminService {
 		}
 		
 		if(document == null){
+			LOG.warn("can not get document by ["+Const.DOCUMENT_FIELD_SID + "='" + documentId + "'"+"]");
 			document = new Document();
 			document.setSId(documentId);
 		}
@@ -85,11 +86,12 @@ public class IssueAdminServiceImpl implements IIssueAdminService {
 		RemoteIssue issue = new RemoteIssue();
 		issue.setProject(this.jiraProject);
 		issue.setType(JIRA_ISSUE_TYPE_BUG);
-		issue.setSummary(StringHelper.isEmpty(document.getTitle()) ? document
-				.getSId() : document.getTitle());
+		issue.setSummary(StringHelper.isEmpty(document.getTitle()) ? document.getSId(): document.getTitle());
 		
 		StringBuilder descBuilder = new StringBuilder();
 		descBuilder.append(Const.DOCUMENT_FIELD_SID).append(": ").append(StringHelper.avoidNull(document.getSId())).append("\n\r");
+		descBuilder.append(Const.DOCUMENT_FIELD_STARTID).append(": ").append(StringHelper.avoidNull(document.getStartId())).append("\n\r");
+		descBuilder.append(Const.DOCUMENT_FIELD_HKEY).append(": ").append(StringHelper.avoidNull(document.getHKey())).append("\n\r");
 		descBuilder.append(Const.DOCUMENT_FIELD_GROUPNAME).append(": ").append(StringHelper.avoidNull(document.getGroupName())).append("\n\r");
 		descBuilder.append(Const.DOCUMENT_FIELD_SITENAME).append(": ").append(StringHelper.avoidNull(document.getSiteName())).append("\n\r");
 		descBuilder.append(Const.DOCUMENT_FIELD_TITLE).append(": ").append(StringHelper.avoidNull(document.getTitle())).append("\n\r");
